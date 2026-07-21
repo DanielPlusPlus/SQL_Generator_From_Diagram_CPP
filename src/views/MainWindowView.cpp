@@ -1,4 +1,4 @@
-#include "views/MainWindowController.hpp"
+#include "views/MainWindowView.hpp"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -31,7 +31,6 @@ void MainWindowView::setupUi(QMainWindow* parentWindow) {
     retranslateUi(parentWindow);
 }
 
-
 void MainWindowView::retranslateUi(QMainWindow* mainWindow) {
     mainWindow->setWindowTitle(
         QCoreApplication::translate(
@@ -41,11 +40,9 @@ void MainWindowView::retranslateUi(QMainWindow* mainWindow) {
     );
 }
 
-
 void MainWindowView::setWidgetToCentralWidget(QWidget* widget) {
     horizontalLayout->addWidget(widget);
 }
-
 
 void MainWindowView::updateStatusBar(const QString& message) {
     statusBar->showMessage(message);

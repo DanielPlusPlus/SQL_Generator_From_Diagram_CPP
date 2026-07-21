@@ -38,12 +38,22 @@ add_executable(
     src/MainWindow.cpp
     include/MainWindow.hpp
     src/views/MainWindowView.cpp
-    include/views/MainWindowController.hpp
+    include/views/MainWindowView.hpp
+    src/views/ToolBarView.cpp
+    include/views/ToolBarView.hpp
+    include/views/MenuBarView.hpp
+    src/views/MenuBarView.cpp
+    include/views/ScrollAreaView.hpp
+    src/views/ScrollAreaView.cpp
+    include/controllers/MainWindowController.hpp
+    src/controllers/MainWindowController.cpp
+    include/views/ConfirmationDialogView.hpp
+    src/views/ConfirmationDialogView.cpp
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    WIN32_EXECUTABLE TRUE
-)
+# set_target_properties(${PROJECT_NAME} PROPERTIES
+#     WIN32_EXECUTABLE TRUE
+# )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     STATIC_CONCPP
@@ -113,4 +123,14 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${ALL_PG_DLLS}
         $<TARGET_FILE_DIR:${PROJECT_NAME}>
+
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/icons"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/icons
+
+    COMMAND "${EXTERNAL_DIR}/Qt-6.11.1/bin/windeployqt.exe"
+        $<$<CONFIG:Debug>:--debug>
+        $<$<NOT:$<CONFIG:Debug>>:--release>
+        --compiler-runtime
+        $<TARGET_FILE:${PROJECT_NAME}>
 )

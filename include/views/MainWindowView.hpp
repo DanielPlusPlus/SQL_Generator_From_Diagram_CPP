@@ -13,12 +13,12 @@ class QMainWindow;
 class MainWindowView : public QObject {
     Q_OBJECT
 private:
-    void retranslateUi(QMainWindow* mainWindow);
-private:
     QWidget* centralWidget;
     QGridLayout* gridLayout;
     QHBoxLayout* horizontalLayout;
     QStatusBar* statusBar;
+
+    void retranslateUi(QMainWindow* mainWindow);
 public:
     explicit MainWindowView(QObject* parent = nullptr);
     void setupUi(QMainWindow* parentWindow);
